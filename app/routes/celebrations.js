@@ -1,7 +1,8 @@
 const express = require('express');
 const { google } = require('googleapis');
 
-const { key, spreadsheetId } = require('../../keys/sheetsAPI');
+const key = process.env.API_KEY;
+const spreadsheetId = process.env.SPREADSHEET_ID;
 
 const router = express.Router();
 
