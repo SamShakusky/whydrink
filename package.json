@@ -4,8 +4,8 @@
   "description": "Drink calendar app",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",
-    "serv": "nodemon server.js && parcel index.html"
+    "start": "nodemon server.js",
+    "dev": "parcel index.html"
   },
   "repository": {
     "type": "git",
