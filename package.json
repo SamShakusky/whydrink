@@ -6,9 +6,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "watch": "parcel index.html",
-    "start": "npm run build && npm run serve",
-    "build": "parcel build index.html",
-    "serve": "node server.js"
+    "start": "node server.js",
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",
