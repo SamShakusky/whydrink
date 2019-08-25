@@ -9,27 +9,33 @@
     flex-direction: column;
     height: 100vh;
     justify-content: center;
+    padding: 24px;
 }
 
 .calendar {
-    align-items: center;
+    align-items: flex-start;
     color: $highlight;
     display: flex;
     flex-direction: column;
     justify-content: center;
     max-width: 820px;
-    text-align: center;
+    text-align: left;
+    font-family: 'Charis';
     
     &__you-may {
-        font-size: 18px;
+        font-size: 16px;
         color: $highlight;
-        margin-bottom: 6px;
-        opacity: .2;
+        margin-bottom: 18px;
+        opacity: .3;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
     }
     
     &__celebration {
-        font-size: 40px;
+        font-size: 56px;
         color: $contrast;
+        line-height: 1.1em;
+        font-weight: bold;
     }
     
     &__reload {
