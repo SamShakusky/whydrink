@@ -2,7 +2,9 @@
 
 #app {
     align-items: center;
-    background: $dark;
+    background-color: $sub;
+    // background-image: linear-gradient(147deg, $sub 0%, $main 74%);
+    background-image: linear-gradient(315deg, $sub 0%, $main 74%);
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -11,7 +13,7 @@
 
 .calendar {
     align-items: center;
-    color: $white;
+    color: $highlight;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,13 +22,14 @@
     
     &__you-may {
         font-size: 18px;
-        color: $gray-light;
+        color: $highlight;
         margin-bottom: 6px;
+        opacity: .2;
     }
     
     &__celebration {
         font-size: 40px;
-        color: $green;
+        color: $contrast;
     }
     
     &__reload {
@@ -36,7 +39,7 @@
         padding: 0;
         margin: 0;
         font-size: 18px;
-        color: white;
+        color: $highlight;
         cursor: pointer;
         user-select: none;
         
@@ -46,7 +49,7 @@
         }
         
         &:active {
-            color: $green;
+            color: $contrast;
         }
     }
 }
