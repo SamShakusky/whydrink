@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "Charis";
+    src : url("../fonts/Charis-regular.woff");
+}
+
+@font-face {
+    font-family: "Charis";
+    font-weight: bold;
+    src : url("../fonts/Charis-bold.woff");
+}
+
 $theme1-1: #000000;
 $theme1-2: #3e3636;
 $theme1-3: #d72323;
@@ -27,4 +38,7 @@ $main: $theme2-1;
 $sub: $theme2-2;
 $contrast: $theme2-3;
 $highlight: $theme2-4;
+
+$font2: 'IBM Plex Sans';
+$font5: 'Charis';
 
