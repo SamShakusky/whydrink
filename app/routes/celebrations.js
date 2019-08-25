@@ -8,7 +8,10 @@ const spreadsheetId = process.env.SPREADSHEET_ID;
 
 const router = express.Router();
 
-const currentDate = new Date();
+const UTCDate = new Date();
+const offset = (UTCDate.getTimezoneOffset() * 60 * 1000 * -1);
+
+const currentDate = new Date(UTCDate.getTime() + offset);
 const currentDay = currentDate.getDate();
 const currentMonth = currentDate.getMonth();
 
