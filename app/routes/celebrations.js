@@ -17,12 +17,15 @@ const spreadsheet = new GoogleSpreadsheet(spreadsheetId);
 
 const router = express.Router();
 
-const UTCDate = new Date();
-const offset = (UTCDate.getTimezoneOffset() * 60 * 1000 * -1);
+const currentDate = new Date();
+// const offset = (UTCDate.getTimezoneOffset() * 60 * 1000 * -1);
 
-const currentDate = new Date(UTCDate.getTime() + offset);
+// const currentDate = new Date(UTCDate.getTime() + offset);
+
 const currentDay = currentDate.getDate();
 const currentMonth = currentDate.getMonth();
+
+console.log('--', currentDay);
 
 router.get('/', async function(req, res) {
     const { locale } = req.query;
