@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import axios from 'axios';
 
 import restURL from './helpers/restURL';
 
 import './scss/calendar';
 
+const allowedWordLength = 40;
+
 
 export default function Calendar() {
     const [ celebrations, setCelebrations ] = useState([]);
     const [ current, setCurrent ] = useState(0);
+    const [ fontSize, setFontSize ] = useState(56);
     const [ isErrorVisible, setErrorVisibility ] = useState(false);
     
     useEffect(() => {
@@ -19,6 +22,7 @@ export default function Calendar() {
         axios(`${restURL}/celebrations/?locale=ru`)
             .then(resp => {
                 setCelebrations(resp.data);
+                adjustFontSize(resp.data, 0);
                 setErrorVisibility(false);
             })
             .catch(err => {
@@ -28,6 +32,23 @@ export default function Calendar() {
             });
     }
     
+    function adjustFontSize(celebs, curr) {
+        let fontSize = 56;
+        const allowedCharAmount = window.innerWidth / allowedWordLength;
+        
+        const longestWordLength = celebs[curr]
+            .split(' ')
+            .reduce((a, b) => (a.length > b.length ? a : b))
+            .length;
+        
+        if (longestWordLength > allowedCharAmount) {
+            const diff = longestWordLength - allowedCharAmount;
+            fontSize = fontSize - diff * 7;
+        }
+        
+        setFontSize(fontSize);
+    }
+    
     function getNextCelebration() {
         let newIndex = +current + 1;
         
@@ -35,7 +56,12 @@ export default function Calendar() {
             newIndex = 0;
         }
         
+        adjustFontSize(celebrations, newIndex);
         setCurrent(newIndex);
+    }
+    
+    function getStyle() {
+        return { fontSize };
     }
     
     if (isErrorVisible) {
@@ -55,7 +81,7 @@ export default function Calendar() {
     return (
         <div className="calendar" onClick={getNextCelebration}>
             <p className="calendar__you-may">Можно выпить, ведь сегодня</p>
-            <h1 className="calendar__celebration">{celebrations[current]}!</h1>
+            <h1 style={getStyle()} className="calendar__celebration">{celebrations[current].trim()}!</h1>
         </div>
     );
 }

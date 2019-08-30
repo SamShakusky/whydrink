@@ -25,8 +25,6 @@ const currentDate = new Date();
 const currentDay = currentDate.getDate();
 const currentMonth = currentDate.getMonth();
 
-console.log('--', currentDay);
-
 router.get('/', async function(req, res) {
     const { locale } = req.query;
     
@@ -52,19 +50,60 @@ router.get('/', async function(req, res) {
     );
 });
 
-router.get('/grab/', async function(req, res) {
-  const data = ['hello', 'world'];
-  const options = { day: 20 };
-  
-  setCellsData(data, options);
-});
 
+const request = require("request");
+const cheerio = require("cheerio");
+
+router.get('/grab/', async function(req, res) {
+//   for (let i = 1; i < 31; i++) {
+//     const options = { day: i };
+//     const url = "";
+    
+//     request(url, function (error, response, body) {
+//       if (error) {
+//         return console.log(`Произошла ошибка: ${error}`);
+//       }
+      
+//       const $ = cheerio.load(body);
+//       let celebrations = [];
+      
+//       $("[itemtype='http://schema.org/Answer'] span[itemprop='text']").each(function(i) {
+//         if (i > 25) {
+//           return false;
+//         }
+        
+//         let text = $(this).text();
+        
+//         if (text.includes("Именины")) {
+//           return true;
+//         }
+        
+//         if (text.includes("(")) {
+//           const regexp = /\((.*?)\)/;
+//           text = text.replace(regexp, "").replace(/ +/g, " ");
+//         }
+        
+//         if (text.includes("-")) {
+//           const splitted = text.split("-");
+//           text = `${splitted[0].trim()} (${splitted[1].trim()})`;
+//         }
+        
+//         celebrations.push(text);
+//       });
+      
+//       console.log(`${i}: Праздников найдено: ${celebrations.length}`);
+      
+//       // res.send(celebrations);
+//       setCellsData(celebrations, options);
+//     });
+//   }
+});
 
 function setCellsData(data, options) {
   spreadsheet.useServiceAccountAuth(credentials, () => {
     spreadsheet.getInfo(function(err, info) {
       console.log(`Loaded document: ${info.title} by ${info.author.email}`);
-      const sheet = info.worksheets[0];
+      const sheet = info.worksheets[1];
       
       sheet.getCells({
         'min-row': options.day,
