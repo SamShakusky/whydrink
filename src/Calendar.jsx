@@ -94,7 +94,7 @@ export default function Calendar() {
     return (
         <div className="container" onClick={getNextCelebration}>
             <div className="calendar">
-                <p className="subheader all-caps">Ты пьёшь, потому что сегодня</p>
+                <p className="subheader all-caps">Так сегодня же</p>
                 <h1 style={getStyle()} className="header">{celebrations[current].trim()}!</h1>
                 <a className="link" href="/beer" onClick={handleClick} >Не хочешь пить в одиночку?</a>
             </div>
