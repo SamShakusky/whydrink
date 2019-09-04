@@ -70,12 +70,19 @@ export default function Calendar() {
         return { fontSize };
     }
     
+    function handleClick(e) {
+        e.stopPropagation();
+    }
+    
+    
     if (isErrorVisible) {
         return (
-            <div className="calendar">
-                <p className="calendar__you-may">Что-то пошло не так</p>
-                <h1 className="calendar__celebration">Наверное, сегодня стоит воздержаться</h1>
-                <button onClick={getAllCelebrations} className="calendar__reload">(или нажми сюда, вдруг повезёт)</button>
+            <div className="container" onClick={getNextCelebration}>
+                <div className="calendar">
+                    <p className="subheader all-caps">Что-то пошло не так</p>
+                    <h1 className="header">Наверное, сегодня стоит воздержаться</h1>
+                    <button onClick={getAllCelebrations} className="calendar__reload">(или нажми сюда, вдруг повезёт)</button>
+                </div>
             </div>
         );
     }
@@ -85,9 +92,12 @@ export default function Calendar() {
     }
     
     return (
-        <div className="calendar" onClick={getNextCelebration}>
-            <p className="calendar__you-may">Можно выпить, ведь сегодня</p>
-            <h1 style={getStyle()} className="calendar__celebration">{celebrations[current].trim()}!</h1>
+        <div className="container" onClick={getNextCelebration}>
+            <div className="calendar">
+                <p className="subheader all-caps">Ты пьёшь, потому что сегодня</p>
+                <h1 style={getStyle()} className="header">{celebrations[current].trim()}!</h1>
+                <a className="link" href="/beer" onClick={handleClick} >Не хочешь пить в одиночку?</a>
+            </div>
         </div>
     );
 }

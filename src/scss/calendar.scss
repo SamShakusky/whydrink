@@ -1,15 +1,72 @@
 @import 'vars';
 
 #app {
-    align-items: center;
     background-color: $sub;
     background-image: linear-gradient(315deg, $sub 0%, $main 74%);
     // background-image: linear-gradient(147deg, $sub 0%, $main 74%);
+    height: 100vh;
+    font-family: 'Charis';
+}
+
+.container {
+    align-items: center;
     display: flex;
     flex-direction: column;
     height: 100vh;
     justify-content: center;
-    padding: 24px;
+    padding: 0 24px;
+}
+
+.header {
+    color: $contrast;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.1em;
+    letter-spacing: 0.5px;
+}
+
+.header-bright {
+    color: $highlight;
+    font-size: 32px;
+    line-height: 1em;
+    letter-spacing: 0.4px;
+    margin-bottom: 24px;
+}
+
+.subheader {
+    color: $highlight;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    margin-bottom: 18px;
+    opacity: .3;
+}
+
+.link {
+    color: $highlight;
+    text-decoration: none;
+    font-size: 15px;
+    opacity: .2;
+    transition: opacity .1s;
+    position: fixed;
+    bottom: 12px;
+    right: 6px;
+    
+    &:hover {
+        opacity: 1;
+    }
+    
+    &:active,
+    &:focus {
+        color: $highlight;
+    }
+    
+    &:visited {
+        color: $highlight;
+    }
+}
+
+.all-caps {
+    text-transform: uppercase;
 }
 
 .calendar {
@@ -17,26 +74,10 @@
     color: $highlight;
     display: flex;
     flex-direction: column;
-    font-family: 'Charis';
     justify-content: center;
     max-width: 820px;
     text-align: left;
-    
-    &__you-may {
-        color: $highlight;
-        font-size: 16px;
-        letter-spacing: 0.3px;
-        margin-bottom: 18px;
-        opacity: .3;
-        text-transform: uppercase;
-    }
-    
-    &__celebration {
-        color: $contrast;
-        font-size: 28px;
-        font-weight: bold;
-        line-height: 1.1em;
-    }
+    margin-top: -80px;
     
     &__reload {
         align-self: flex-end;
