@@ -13,20 +13,26 @@ const credentials = isDevMode ? require('../../keys/service-account.json') : {
 };
 
 const spreadsheet = new GoogleSpreadsheet(spreadsheetId);
-
-
 const router = express.Router();
 
-const currentDate = new Date();
-// const offset = (UTCDate.getTimezoneOffset() * 60 * 1000 * -1);
-
-// const currentDate = new Date(UTCDate.getTime() + offset);
-
-const currentDay = currentDate.getDate();
-const currentMonth = currentDate.getMonth();
+const dayInMillisecs = 24 * 60 * 60 * 1000;
 
 router.get('/', async function(req, res) {
-    const { locale } = req.query;
+    const { locale, time } = req.query;
+    
+    const serverTime = Date.now();
+    const timeDifferense = Math.abs(+time - +serverTime);
+    
+    if (timeDifferense > dayInMillisecs) {
+      return res.status(400).send({
+        message: 'You want too much!',
+     });
+    }
+    
+    const currentDate = new Date(+time);
+    
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.getMonth();
     
     const sheets = google.sheets('v4');
     
@@ -45,7 +51,11 @@ router.get('/', async function(req, res) {
           throw error;
         }
         
-        res.send(...response.data.values);
+        res.send({
+          data: response.data.values[0],
+          date: currentDate.getTime(),
+          serverTime,
+        });
       }
     );
 });

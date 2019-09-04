@@ -6,6 +6,7 @@ import restURL from './helpers/restURL';
 import './scss/calendar';
 
 const allowedWordLength = 40;
+const currentTime = Date.now();
 
 
 export default function Calendar() {
@@ -19,11 +20,16 @@ export default function Calendar() {
     }, [])
     
     function getAllCelebrations() {
-        axios(`${restURL}/celebrations/?locale=ru`)
+        axios(`${restURL}/celebrations/?locale=ru&time=${currentTime}`)
             .then(resp => {
-                setCelebrations(resp.data);
-                adjustFontSize(resp.data, 0);
+                setCelebrations(resp.data.data);
+                adjustFontSize(resp.data.data, 0);
                 setErrorVisibility(false);
+                
+                const date = new Date(+resp.data.date);
+                const servDate = new Date(+resp.data.serverTime);
+                console.log(date);
+                console.log(servDate);
             })
             .catch(err => {
                 console.error(err);
