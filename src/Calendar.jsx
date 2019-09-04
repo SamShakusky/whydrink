@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef, useMemo } from "react"
 import axios from 'axios';
 
 import restURL from './helpers/restURL';
+import setMetaTag from "./helpers/setMetaTag";
 
 import './scss/calendar';
 
@@ -22,13 +23,16 @@ export default function Calendar() {
     function getAllCelebrations() {
         axios(`${restURL}/celebrations/?locale=ru&time=${currentTime}`)
             .then(resp => {
-                setCelebrations(resp.data.data);
-                adjustFontSize(resp.data.data, 0);
+                const { data, date, serverTime } = resp.data;
+                
+                setCelebrations(data);
+                adjustFontSize(data, 0);
+                setMetaTags(data);
                 setErrorVisibility(false);
                 
-                const date = new Date(+resp.data.date);
-                const servDate = new Date(+resp.data.serverTime);
-                console.log(date);
+                const clientDate = new Date(+date);
+                const servDate = new Date(+serverTime);
+                console.log(clientDate);
                 console.log(servDate);
             })
             .catch(err => {
@@ -53,6 +57,13 @@ export default function Calendar() {
         }
         
         setFontSize(fontSize);
+    }
+    
+    function setMetaTags(celebs) {
+        const value = `Потому что сегодня праздник — ${celebs[0].trim()}!`;
+        setMetaTag('name="description"', value);
+        setMetaTag('property="og:description"', value);
+        setMetaTag('name="twitter:description"', value);
     }
     
     function getNextCelebration() {
