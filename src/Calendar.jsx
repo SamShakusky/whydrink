@@ -75,7 +75,7 @@ export default function Calendar() {
     }
     
     
-    if (isErrorVisible) {
+    if (isErrorVisible || !celebrations) {
         return (
             <div className="container" onClick={getNextCelebration}>
                 <div className="calendar">
