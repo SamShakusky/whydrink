@@ -21,7 +21,9 @@ router.get('/', async function(req, res) {
     const { locale, time } = req.query;
     
     const serverTime = Date.now();
+    console.log('server time is: ', new Date(serverTime).toLocaleTimeString());
     const timeDifferense = Math.abs(+time - +serverTime);
+    console.log('diff is (minutes): ', timeDifferense / 1000 / 60);
     
     if (timeDifferense > dayInMillisecs) {
       return res.status(400).send({
