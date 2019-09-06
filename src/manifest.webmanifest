@@ -1,0 +1,8 @@
+{
+    "name": "Why Drink Today",
+    "short_name": "Why Drink",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#222831",
+    "description": "Зачем сегодня пить?"
+}
