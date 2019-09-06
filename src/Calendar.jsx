@@ -8,7 +8,7 @@ import './scss/calendar';
 
 const allowedWordLength = 40;
 const currentTime = Date.now();
-
+const timeOffset = new Date().getTimezoneOffset();
 
 export default function Calendar() {
     const [ celebrations, setCelebrations ] = useState([]);
@@ -21,7 +21,7 @@ export default function Calendar() {
     }, [])
     
     function getAllCelebrations() {
-        axios(`${restURL}/celebrations/?locale=ru&time=${currentTime}`)
+        axios(`${restURL}/celebrations/?locale=ru&time=${currentTime}&offset=${timeOffset}`)
             .then(resp => {
                 const { data, date, serverTime } = resp.data;
                 

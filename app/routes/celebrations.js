@@ -18,13 +18,21 @@ const router = express.Router();
 const dayInMillisecs = 24 * 60 * 60 * 1000;
 
 router.get('/', async function(req, res) {
-    const { locale, time } = req.query;
-    
+    const { locale, time, offset } = req.query;
     const serverTime = Date.now();
+    const serverOffset = new Date().getTimezoneOffset();
+    
+    console.log('server offset:', serverOffset);
+    console.log('client offset:', offset);
+
     console.log('server time is: ', new Date(serverTime).toLocaleTimeString());
-    console.log('server time is: ', new Date(serverTime));
     console.log('client time is: ', new Date(+time).toLocaleTimeString());
+    
+    console.log('server time is: ', new Date(serverTime));
     console.log('client time is: ', new Date(+time));
+    
+    const absOffset = serverOffset - +offset;
+    console.log('abs offset: ', absOffset);
     const timeDifferense = Math.abs(+time - +serverTime);
     console.log('diff is (minutes): ', timeDifferense / 1000 / 60);
     
@@ -34,7 +42,7 @@ router.get('/', async function(req, res) {
      });
     }
     
-    const currentDate = new Date(+time);
+    const currentDate = new Date(+time + absOffset * 60 * 1000);
     
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth();
