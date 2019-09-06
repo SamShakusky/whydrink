@@ -52,3 +52,76 @@ html {
 *, *:before, *:after {
     box-sizing: inherit;
 }
+
+#app {
+    background-color: $sub;
+    background-image: linear-gradient(315deg, $sub 0%, $main 74%);
+    // background-image: linear-gradient(147deg, $sub 0%, $main 74%);
+    height: 100vh;
+    font-family: 'Charis';
+}
+
+.container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    padding: 0 5vw 0 15vw;
+    
+    @media screen and (max-width: 640px) {
+        padding: 0 32px;
+    }
+}
+
+.header {
+    color: $contrast;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    line-height: 1.1em;
+    user-select: none;
+}
+
+.header-bright {
+    color: $highlight;
+    font-size: 32px;
+    letter-spacing: 0.4px;
+    line-height: 1em;
+    margin-bottom: 24px;
+}
+
+.subheader {
+    color: $highlight;
+    font-size: 16px;
+    letter-spacing: 0.3px;
+    margin-bottom: 18px;
+    opacity: .3;
+}
+
+.link {
+    bottom: 12px;
+    color: $highlight;
+    font-size: 15px;
+    opacity: .2;
+    position: fixed;
+    right: 6px;
+    text-decoration: none;
+    transition: opacity .1s;
+    &:hover {
+        opacity: 1;
+    }
+    
+    &:active,
+    &:focus {
+        color: $highlight;
+    }
+    
+    &:visited {
+        color: $highlight;
+    }
+}
+
+.all-caps {
+    text-transform: uppercase;
+}
