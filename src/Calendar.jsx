@@ -43,7 +43,7 @@ export default function Calendar() {
     }
     
     function adjustFontSize(celebs, curr) {
-        let fontSize = 56;
+        let fontSize = 52;
         const allowedCharAmount = window.innerWidth / allowedWordLength;
         
         const longestWordLength = celebs[curr]
@@ -53,7 +53,7 @@ export default function Calendar() {
         
         if (longestWordLength > allowedCharAmount) {
             const diff = longestWordLength - allowedCharAmount;
-            fontSize = fontSize - diff * 7;
+            fontSize = fontSize - diff * 5;
         }
         
         setFontSize(fontSize);
