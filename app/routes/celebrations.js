@@ -15,34 +15,22 @@ const credentials = isDevMode ? require('../../keys/service-account.json') : {
 const spreadsheet = new GoogleSpreadsheet(spreadsheetId);
 const router = express.Router();
 
-const dayInMillisecs = 24 * 60 * 60 * 1000;
+const oneDay = 24 * 60;
 
 router.get('/', async function(req, res) {
-    const { locale, time, offset } = req.query;
-    const serverTime = Date.now();
+    const { locale, offset: clientOffset } = req.query;
+    const currentTime = Date.now();
     const serverOffset = new Date().getTimezoneOffset();
     
-    console.log('server offset:', serverOffset);
-    console.log('client offset:', offset);
-
-    console.log('server time is: ', new Date(serverTime).toLocaleTimeString());
-    console.log('client time is: ', new Date(+time).toLocaleTimeString());
+    const absOffset = serverOffset - +clientOffset;
     
-    console.log('server time is: ', new Date(serverTime));
-    console.log('client time is: ', new Date(+time));
-    
-    const absOffset = serverOffset - +offset;
-    console.log('abs offset: ', absOffset);
-    const timeDifferense = Math.abs(+time - +serverTime);
-    console.log('diff is (minutes): ', timeDifferense / 1000 / 60);
-    
-    if (timeDifferense > dayInMillisecs) {
+    if (Math.abs(clientOffset) - oneDay > 0) {
       return res.status(400).send({
         message: 'You want too much!',
      });
     }
     
-    const currentDate = new Date(+time + absOffset * 60 * 1000);
+    const currentDate = new Date(+currentTime + absOffset * 60 * 1000);
     
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth();
@@ -64,11 +52,7 @@ router.get('/', async function(req, res) {
           throw error;
         }
         
-        res.send({
-          data: response.data.values[0],
-          date: currentDate.getTime(),
-          serverTime,
-        });
+        res.send({ data: response.data.values[0] });
       }
     );
 });

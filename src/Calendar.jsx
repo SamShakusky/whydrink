@@ -7,7 +7,6 @@ import setMetaTag from "./helpers/setMetaTag";
 import './scss/calendar';
 
 const allowedWordLength = 40;
-const currentTime = Date.now();
 const timeOffset = new Date().getTimezoneOffset();
 
 export default function Calendar() {
@@ -21,19 +20,14 @@ export default function Calendar() {
     }, [])
     
     function getAllCelebrations() {
-        axios(`${restURL}/celebrations/?locale=ru&time=${currentTime}&offset=${timeOffset}`)
+        axios(`${restURL}/celebrations/?locale=ru&offset=${timeOffset}`)
             .then(resp => {
-                const { data, date, serverTime } = resp.data;
+                const { data } = resp.data;
                 
                 setCelebrations(data);
                 adjustFontSize(data, 0);
                 setMetaTags(data);
                 setErrorVisibility(false);
-                
-                const clientDate = new Date(+date);
-                const servDate = new Date(+serverTime);
-                console.log(clientDate);
-                console.log(servDate);
             })
             .catch(err => {
                 console.error(err);
