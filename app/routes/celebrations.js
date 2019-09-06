@@ -27,7 +27,7 @@ router.get('/', async function(req, res) {
     if (Math.abs(clientOffset) - oneDay > 0) {
       return res.status(400).send({
         message: 'You want too much!',
-     });
+      });
     }
     
     const currentDate = new Date(+currentTime + absOffset * 60 * 1000);
@@ -48,7 +48,11 @@ router.get('/', async function(req, res) {
       },
       (error, response) => {
         if (error) {
-          console.error('The API returned an error.');
+          res.status(400).send({
+            message: "Error fetching values",
+          });
+          
+          console.error('___\nvalues.get API error:');
           throw error;
         }
         
@@ -117,7 +121,16 @@ function setCellsData(data, options) {
         'max-row': options.day,
         'max-col': data.length,
         'return-empty': true
-      }, function(err, cells) {
+      }, function(error, cells) {
+        if (error) {
+          res.status(400).send({
+            message: error.message,
+          });
+          
+          console.error('___\ngetCells API error:');
+          throw error;
+        }
+        
         cells.map((el, i) => {
           cells[i].value = data[i];
         })
