@@ -22,6 +22,9 @@ router.get('/', async function(req, res) {
     
     const serverTime = Date.now();
     console.log('server time is: ', new Date(serverTime).toLocaleTimeString());
+    console.log('server time is: ', new Date(serverTime));
+    console.log('client time is: ', new Date(+time).toLocaleTimeString());
+    console.log('client time is: ', new Date(+time));
     const timeDifferense = Math.abs(+time - +serverTime);
     console.log('diff is (minutes): ', timeDifferense / 1000 / 60);
     
