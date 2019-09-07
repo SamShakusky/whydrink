@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import ReactGA from 'react-ga';
 import axios from 'axios';
 
 import restURL from './helpers/restURL';
@@ -17,6 +18,10 @@ export default function Calendar() {
     
     useEffect(() => {
         getAllCelebrations();
+    }, [])
+    
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
     }, [])
     
     function getAllCelebrations() {

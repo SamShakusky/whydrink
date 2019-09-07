@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
-
+import ReactGA from 'react-ga';
 
 export default function Monetisation() {
     useEffect(() => {
         document.title = "Зачем пить одному?";
+    }, [])
+    
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
     }, [])
     
     return (
