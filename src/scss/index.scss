@@ -53,6 +53,17 @@ html {
     box-sizing: inherit;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+    &:visited {
+        color: inherit;
+    }
+    &:focus {
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
 #app {
     background-color: $sub;
     background-image: linear-gradient(315deg, $sub 0%, $main 74%);
@@ -100,7 +111,7 @@ html {
 }
 
 .link {
-    bottom: 12px;
+    top: 12px;
     color: $highlight;
     font-size: 15px;
     opacity: .2;

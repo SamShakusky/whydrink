@@ -11,6 +11,25 @@
     text-align: left;
     width: 100%;
     
+    &__more {
+        bottom: 0;
+        color: $highlight;
+        font-size: 18px;
+        opacity: .5;
+        position: fixed;
+        right: 0;
+        text-decoration: none;
+        transition: opacity .1s;
+        background: none;
+        border: 0;
+        font-family: 'Charis';
+        padding: 20px 18px;
+        &:focus {
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+    }
+    
     &__reload {
         background: none;
         border: 0;

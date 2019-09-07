@@ -102,10 +102,15 @@ export default function Calendar() {
     }
     
     return (
-        <div className="container" onClick={getNextCelebration}>
+        <div className="container">
             <div className="calendar">
                 <p className="subheader all-caps">Так сегодня же</p>
-                <h1 style={getStyle()} className="header">{celebrations[current].trim()}!</h1>
+                <h1 style={getStyle()} className="header">
+                    <a href={`//google.com/search?q=${celebrations[current].replace(/\s+/g, '+')}`} target="_blank">
+                        {celebrations[current].trim()}!
+                    </a>
+                </h1>
+                <button className="calendar__more" onClick={getNextCelebration} type="button">Другой повод</button>
                 <a className="link" href="/beer" onClick={handleClick} >Не хочешь пить в одиночку?</a>
             </div>
         </div>
