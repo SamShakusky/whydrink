@@ -84,6 +84,13 @@ export default function Calendar() {
         e.stopPropagation();
     }
     
+    function handleLink() {
+        ReactGA.event({
+            category: 'User',
+            action: 'Clicked a link',
+            label: celebrations[current].trim(),
+        });
+    }
     
     if (isErrorVisible || !celebrations) {
         return (
@@ -106,7 +113,7 @@ export default function Calendar() {
             <div className="calendar">
                 <p className="subheader all-caps">Так сегодня же</p>
                 <h1 style={getStyle()} className="header">
-                    <a href={`//google.com/search?q=${celebrations[current].replace(/\s+/g, '+')}`} target="_blank">
+                    <a href={`//google.com/search?q=${celebrations[current].replace(/\s+/g, '+')}`} target="_blank" onClick={handleLink}>
                         {celebrations[current].trim()}!
                     </a>
                 </h1>
